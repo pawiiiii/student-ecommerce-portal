@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student E-Commerce Portal</title>
     <style>
-        /* BASE SYSTEM STYLES */
+        /* BASE RESET & STRUCTURE STYLE */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background-color: #f8fafc; color: #1e293b; overflow-x: hidden; }
         
         .hidden { display: none !important; }
         
-        /* --- LOGIN SCREEN (Screenshot 259) --- */
+        /* --- LOGIN PAGE (Screenshot 259) --- */
         .login-screen { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f1f5f9; }
         .login-card { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 440px; border: 1px solid #e2e8f0; }
         .login-card h2 { color: #1e3a8a; margin-bottom: 24px; font-size: 26px; font-weight: 700; text-align: center; }
@@ -23,7 +23,7 @@
         .login-btn:hover { background-color: #172554; }
         .forgot-link { display: block; text-align: center; margin-top: 20px; color: #3b82f6; text-decoration: none; font-size: 14px; font-weight: 500; }
 
-        /* --- NAVIGATION HEADER & SIDEBAR --- */
+        /* --- APP NAVIGATION FRAMEWORK (Screenshot 260, 262) --- */
         .app-container { display: flex; flex-direction: column; min-height: 100vh; }
         header { background-color: #1e3a8a; color: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
         header h1 { font-size: 20px; font-weight: 600; }
@@ -38,7 +38,7 @@
         .main-content { padding: 24px; flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; }
         .page-title { color: #1e3a8a; font-size: 24px; font-weight: 700; margin-bottom: 24px; }
 
-        /* --- HOMEPAGE / DASHBOARD --- */
+        /* --- HOMEPAGE VIEW (Screenshot 260, 261) --- */
         .welcome-banner { background: white; padding: 24px; border-radius: 12px; margin-bottom: 24px; border: 1px solid #e2e8f0; }
         .welcome-banner h2 { color: #1e3a8a; font-size: 22px; margin-bottom: 6px; }
         .welcome-banner p { color: #64748b; font-size: 15px; }
@@ -52,29 +52,17 @@
         .badge.uniform { background-color: #f3e8ff; color: #6b21a8; }
         .material-price { font-weight: 700; font-size: 15px; color: #0f172a; }
         
-        .right-panel { flex: 1; min-width: 280px; background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.01); }
+        .right-panel { flex: 1; min-width: 280px; background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 24px; }
         .right-panel h3 { color: #1e3a8a; font-size: 18px; margin-bottom: 16px; }
         .summary-row { display: flex; justify-content: space-between; margin-bottom: 14px; font-size: 15px; color: #475569; }
         .summary-row.total { font-size: 20px; font-weight: 700; color: #0f172a; border-top: 1px solid #e2e8f0; padding-top: 14px; margin-top: 14px; }
         .action-btn { width: 100%; padding: 12px; background-color: #d97706; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; margin-top: 10px; transition: 0.2s; }
         .action-btn:hover { background-color: #b45309; }
 
-        /* --- SHOP SECTIONS --- */
+        /* --- PRODUCTS STORES LAYOUT (Screenshot 263 - 268) --- */
         .shop-layout { display: flex; gap: 24px; flex-wrap: wrap; }
         .filter-sidebar { width: 260px; min-width: 240px; background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 20px; height: fit-content; }
         .filter-sidebar h3 { color: #1e3a8a; font-size: 16px; margin-bottom: 16px; font-weight: 700; }
         .filter-group { margin-bottom: 16px; }
         .filter-group label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
-        .filter-group select, .filter-group input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 14px; outline: none; }
-        .products-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-        .product-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; display: flex; flex-direction: column; }
-        .product-img-placeholder { height: 180px; background-color: #f1f5f9; display: flex; align-items: center; justify-content: center; text-align: center; padding: 16px; color: #64748b; font-size: 13px; font-weight: 600; border-bottom: 1px solid #e2e8f0; }
-        .product-details { padding: 16px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; }
-        .product-details h4 { font-size: 14px; color: #0f172a; margin-bottom: 8px; line-height: 1.4; font-weight: 600; }
-        .product-details .price { font-size: 16px; font-weight: 700; color: #1e3a8a; margin-bottom: 8px; }
-        .stock-badge { display: inline-block; align-self: flex-start; padding: 3px 8px; font-size: 11px; font-weight: 600; border-radius: 4px; }
-        .stock-badge.in { background-color: #d1fae5; color: #065f46; }
-
-        /* --- MODERN REVISED TABLE FORMAT --- */
-        .table-responsive { width: 100%; overflow-x: auto; background: white; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 24px; }
-        .portal-table { width: 100%; border-collapse: collapse; text-align: left; font
+        .filter-group select, .filter-group input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 14
