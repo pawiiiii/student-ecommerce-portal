@@ -92,11 +92,12 @@
         .settle-items-btn { width: 100%; padding: 14px; background-color: #1e3a8a; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; margin-top: 15px; transition: 0.2s; }
         .settle-items-btn:hover { background-color: #172554; }
         
-        /* QUANTITY CONTROLLER WITH PLUS AND MINUS */
-        .quantity-control-wrapper { display: flex; align-items: center; gap: 6px; }
-        .qty-adjust-btn { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; background-color: #e2e8f0; border: none; border-radius: 4px; font-weight: bold; color: #334155; cursor: pointer; font-size: 14px; transition: 0.15s; }
+        /* REVISED: CLICKABLE QUANTITY CONTROLLER WITH LARGER TARGET AREA */
+        .quantity-control-wrapper { display: flex; align-items: center; gap: 4px; }
+        .qty-adjust-btn { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background-color: #e2e8f0; border: none; border-radius: 6px; font-weight: bold; color: #334155; cursor: pointer; font-size: 16px; transition: all 0.2s ease; user-select: none; }
         .qty-adjust-btn:hover { background-color: #cbd5e1; color: #0f172a; }
-        .quantity-badge { background: #f1f5f9; padding: 4px 12px; border-radius: 6px; font-weight: 600; font-size: 13px; min-width: 34px; text-align: center; border: 1px solid #e2e8f0; }
+        .qty-adjust-btn:active { transform: scale(0.9); background-color: #94a3b8; }
+        .quantity-badge { background: #f1f5f9; padding: 6px 14px; border-radius: 6px; font-weight: 600; font-size: 14px; min-width: 38px; text-align: center; border: 1px solid #e2e8f0; }
 
         /* --- NEW ORDER STATUS LAYOUT (Screenshot 284) --- */
         .status-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px; flex-wrap: wrap; }
@@ -132,20 +133,29 @@
         .action-link:hover { text-decoration: underline; }
         .history-items-list { font-size: 13px; font-weight: 500; color: #334155; line-height: 1.5; list-style: none; }
 
-        /* --- NEW ACCOUNT INFO LAYOUT WITH CUSTOM DECORATIVE GRADIENT --- */
+        /* --- REVISED: ACCOUNT INFO LAYOUT WITH INTEGRATED BLUE & GOLD GRADIENT BOX --- */
         .account-grid-layout { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
-        .account-left-card { flex: 1; min-width: 280px; background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 0 0 30px 0; text-align: center; display: flex; flex-direction: column; align-items: center; overflow: hidden; }
         
-        /* BLUE, YELLOW, GOLD SPECIFIC GRADIENT BAR HEADER */
-        .account-gradient-banner { width: 100%; height: 80px; background: linear-gradient(135deg, #1e3a8a 0%, #eab308 60%, #ca8a04 100%); margin-bottom: -45px; }
+        /* Buong box ay naka blue and gold gradient na hanggang "Computer Science Student" */
+        .account-left-card { flex: 1; min-width: 280px; background: linear-gradient(135deg, #1e3a8a 0%, #ca8a04 100%); border-radius: 12px; border: 1px solid #ca8a04; padding: 30px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 15px rgba(30,58,138,0.15); }
         
-        .account-avatar { width: 90px; height: 90px; background-color: #1e3a8a; border-radius: 50%; color: white; font-size: 36px; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 16px; border: 4px solid white; position: relative; z-index: 2; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .account-left-card h3 { font-size: 18px; color: #0f172a; font-weight: 700; margin-bottom: 4px; }
-        .account-left-card p { font-size: 14px; color: #64748b; margin-bottom: 20px; }
-        .info-stack { width: 100%; text-align: left; border-top: 1px solid #f1f5f9; padding: 16px 24px 0 24px; }
+        /* REVISED: Profile pic button na may built-in camera icon */
+        .account-avatar-btn { width: 96px; height: 96px; background-color: rgba(255, 255, 255, 0.2); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; border: 3px solid #ffffff; cursor: pointer; transition: all 0.2s ease; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .account-avatar-btn:hover { background-color: rgba(255, 255, 255, 0.3); transform: scale(1.04); }
+        .account-avatar-btn:active { transform: scale(0.96); }
+        
+        /* SVG Camera Icon setup */
+        .camera-icon { width: 36px; height: 36px; fill: #ffffff; }
+        
+        /* Puti at ginto ang kulay ng text para lumitaw sa madilim na gradient background */
+        .account-left-card h3 { font-size: 20px; color: #ffffff; font-weight: 700; margin-bottom: 6px; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        .account-left-card p { font-size: 14px; color: #fef08a; font-weight: 500; margin-bottom: 24px; letter-spacing: 0.5px; }
+        
+        /* Info stack fields sa ilalim ng text */
+        .info-stack { width: 100%; text-align: left; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; }
         .info-stack-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; }
-        .info-stack-row label { color: #64748b; font-weight: 500; }
-        .info-stack-row span { color: #0f172a; font-weight: 600; }
+        .info-stack-row label { color: #e2e8f0; font-weight: 500; }
+        .info-stack-row span { color: #ffffff; font-weight: 600; }
 
         .account-right-panel { flex: 2; min-width: 320px; background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 24px; }
         .account-right-panel h3 { color: #1e3a8a; font-size: 16px; font-weight: 700; margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
@@ -287,9 +297,9 @@
                                         <td>$89.99</td>
                                         <td>
                                             <div class="quantity-control-wrapper">
-                                                <button class="qty-adjust-btn">-</button>
+                                                <button class="qty-adjust-btn" onclick="alert('Bawas item quantity')">-</button>
                                                 <span class="quantity-badge">1</span>
-                                                <button class="qty-adjust-btn">+</button>
+                                                <button class="qty-adjust-btn" onclick="alert('Dagdag item quantity')">+</button>
                                             </div>
                                         </td>
                                         <td style="font-weight: 700;">$89.99</td>
@@ -302,9 +312,9 @@
                                         <td>$125.50</td>
                                         <td>
                                             <div class="quantity-control-wrapper">
-                                                <button class="qty-adjust-btn">-</button>
+                                                <button class="qty-adjust-btn" onclick="alert('Bawas item quantity')">-</button>
                                                 <span class="quantity-badge">1</span>
-                                                <button class="qty-adjust-btn">+</button>
+                                                <button class="qty-adjust-btn" onclick="alert('Dagdag item quantity')">+</button>
                                             </div>
                                         </td>
                                         <td style="font-weight: 700;">$125.50</td>
@@ -317,9 +327,9 @@
                                         <td>$35.00</td>
                                         <td>
                                             <div class="quantity-control-wrapper">
-                                                <button class="qty-adjust-btn">-</button>
+                                                <button class="qty-adjust-btn" onclick="alert('Bawas item quantity')">-</button>
                                                 <span class="quantity-badge">1</span>
-                                                <button class="qty-adjust-btn">+</button>
+                                                <button class="qty-adjust-btn" onclick="alert('Dagdag item quantity')">+</button>
                                             </div>
                                         </td>
                                         <td style="font-weight: 700;">$35.00</td>
@@ -444,20 +454,6 @@
                                 <td><span class="history-badge success">Delivered</span></td>
                                 <td><span class="action-link" onclick="navigateTo('status')">View Order</span></td>
                             </tr>
-                            <tr>
-                                <td><strong>#ORD-2026-6541</strong></td>
-                                <td>February 18, 2026</td>
-                                <td>
-                                    <ul class="history-items-list">
-                                        <li>• Introduction to Computer Science Textbook</li>
-                                        <li>• Calculus for Engineers</li>
-                                        <li>• School Polo Shirt - White</li>
-                                    </ul>
-                                </td>
-                                <td style="font-weight: 700;">$250.49</td>
-                                <td><span class="history-badge failed">Cancelled</span></td>
-                                <td><span class="action-link">View Order</span></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -468,35 +464,33 @@
                 <div class="account-grid-layout">
                     
                     <div class="account-left-card">
-                        <div class="account-gradient-banner"></div>
                         
-                        <div class="account-avatar">JD</div>
-                        <h3>Dela Cruz, Juan</h3>
+                        <button class="account-avatar-btn" onclick="alert('Mag-upload o magpalit ng profile picture')" title="Change Profile Picture">
+                            <svg class="camera-icon" viewBox="0 0 24 24">
+                                <path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5 5 5 0 0 0 5 5 5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3z"/>
+                            </svg>
+                        </button>
+                        
+                        <h3>Juan Dela Cruz</h3>
                         <p>Computer Science Student</p>
-                       
+                        
                         <div class="info-stack">
-                            <div class="info-stack-row"><label>Student ID</label><span>2026-10492</span></div>
-                            <div class="info-stack-row"><label>Portal Status</label><span style="color:#22c55e">Active Regular</span></div>
-                            <div class="info-stack-row"><label>Campus E-Wallet</label><span>$150.25</span></div>
+                            <div class="info-stack-row"><label>Status</label><span>Regular</span></div>
+                            <div class="info-stack-row"><label>Year Level</label><span>3rd Year</span></div>
                         </div>
                     </div>
-                    
+
                     <div class="account-right-panel">
-                        <h3>Personal Coordinates</h3>
+                        <h3>Personal Details</h3>
                         <div class="input-row-block">
                             <div class="input-field-unit"><label>First Name</label><input type="text" value="Juan"></div>
                             <div class="input-field-unit"><label>Last Name</label><input type="text" value="Dela Cruz"></div>
                         </div>
                         <div class="input-row-block">
-                            <div class="input-field-unit"><label>Email Address</label><input type="email" value="j.delacruz@university.edu.ph"></div>
-                            <div class="input-field-unit"><label>Contact Number</label><input type="text" value="+63 917 123 4567"></div>
-                        </div>
-                        <div class="input-field-unit" style="margin-top: 16px;">
-                            <label>Delivery Address</label>
-                            <input type="text" value="Room 304, Men's Dormitory, Main Campus Green Hills">
+                            <div class="input-field-unit"><label>Student ID</label><input type="text" value="2023-10922" disabled></div>
+                            <div class="input-field-unit"><label>Email Address</label><input type="email" value="juan.delacruz@university.edu"></div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
 
@@ -504,36 +498,46 @@
     </div>
 
     <script>
-        function navigateTo(targetView) {
-            document.getElementById('sidebarMenu').classList.remove('active');
-            
-            if (targetView === 'logout') {
+        // SIDEBAR TOGGLE MECHANISM
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebarMenu');
+            sidebar.classList.toggle('active');
+        }
+
+        // SPA NAVIGATION ROUTER SYSTEM
+        function navigateTo(viewId) {
+            if (viewId === 'logout') {
                 document.getElementById('appShell').classList.add('hidden');
                 document.getElementById('loginPage').classList.remove('hidden');
                 return;
             }
             
-            if (targetView === 'homepage' || document.getElementById('loginPage').classList.contains('hidden')) {
+            if (viewId === 'homepage') {
                 document.getElementById('loginPage').classList.add('hidden');
                 document.getElementById('appShell').classList.remove('hidden');
             }
 
+            // Hide all views
             const views = document.querySelectorAll('.view-section');
-            views.forEach(view => view.classList.add('hidden'));
+            views.forEach(v => v.classList.add('hidden'));
 
-            const activeView = document.getElementById('view-' + targetView);
-            if (activeView) activeView.classList.remove('hidden');
+            // Show selected view
+            const targetView = document.getElementById('view-' + viewId);
+            if (targetView) {
+                targetView.classList.remove('hidden');
+            }
 
+            // Update sidebar focus
             const items = document.querySelectorAll('.sidebar-item');
             items.forEach(item => item.classList.remove('active'));
             
-            const currentTab = document.getElementById('nav-' + targetView);
-            if (currentTab) currentTab.classList.add('active');
-            
-            window.scrollTo(0, 0);
-        }
-        function toggleSidebar() {
-            document.getElementById('sidebarMenu').classList.toggle('active');
+            const activeNav = document.getElementById('nav-' + viewId);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            // Auto close mobile sidebar after click
+            document.getElementById('sidebarMenu').classList.remove('active');
         }
     </script>
 </body>
