@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student E-Commerce Portal</title>
+    <style>
+        /* BASE & RESET STYLES */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #f3f4f6; color: #333; overflow-x: hidden; }
+        
+        /* UTILITIES */
+        .hidden { display: none !important; }
+        
+        /* --- PHASE 1: LOGIN PAGE STYLES --- */
+        .login-screen { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f8fafc; }
+        .login-card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 450px; text-align: center; border: 1px solid #e2e8f0; }
+        .login-card h2 { color: #1e3a8a; margin-bottom: 25px; font-size: 26px; font-weight: 600; }
+        .form-group { text-align: left; margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: 600; color: #475569; margin-bottom: 8px; font-size: 14px; }
+        .form-group input { width: 100%; padding: 12px; background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; outline: none; }
+        .form-group input:focus { border-color: #1e3a8a; background-color: white; }
+        .login-btn { width: 100%; padding: 14px; background-color: #1e3a8a; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .login-btn:hover { background-color: #172554; }
+        .forgot-link { display: block; margin-top: 20px; color: #3b82f6; text-decoration: none; font-size: 14px; }
+        
+        /* --- MAIN PORTAL APP LAYOUT --- */
+        .app-container { display: flex; flex-direction: column; min-height: 100vh; position: relative; }
+        
+        /* NAVBAR HEADER */
+        header { background-color: #1e3a8a; color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 10; }
+        header h1 { font-size: 20px; font-weight: 600; }
+        .menu-toggle { font-size: 24px; cursor: pointer; background: none; border: none; color: white; }
+        
+        /* SIDEBAR NAVIGATION */
+        .sidebar { position: absolute; top: 58px; left: -100%; width: 100%; max-width: 320px; height: calc(100vh - 58px); background-color: #1e3a8a; color: white; transition: 0.3s ease; z-index: 100; padding-top: 20px; box-shadow: 5px 0 15px rgba(0,0,0,0.1); }
+        .sidebar.active { left: 0; }
+        .sidebar-item { padding: 15px 25px; display: flex; align-items: center; cursor: pointer; font-size: 16px; border-left: 4px solid transparent; color: #cbd5e1; transition: 0.2s; }
+        .sidebar-item:hover, .sidebar-item.active { background-color: rgba(255,255,255,0.1); color: #fbbf24; border-left-color: #fbbf24; }
+        .sidebar-item.logout { margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); }
+        
+        /* CONTENT WRAPPER */
+        .main-content { padding: 30px; flex: 1; max-width: 1400px; width: 100%; margin: 0 auto; }
+        
+        /* --- DASHBOARD / HOMEPAGE --- */
+        .welcome-banner { background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e5e7eb; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .welcome-banner h2 { color: #1e3a8a; font-size: 24px; margin-bottom: 8px; }
+        .welcome-banner p { color: #6b7280; font-size: 15px; }
+        
+        .dashboard-grid { display: flex; gap: 25px; align-items: flex-start; }
+        .left-panel { flex: 2; background: white; border-radius: 12px; border: 1px solid #e5e7eb; padding: 25px; }
+        .left-panel h3 { color: #1e3a8a; margin-bottom: 20px; font-size: 18px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; }
+        
+        /* LIST VIEW (HOMEPAGE MATERIALS) */
+        .material-list-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #f3f4f6; }
+        .material-list-item:last-child { border-bottom: none; }
+        .material-info h4 { font-size: 16px; color: #111827; margin-bottom: 6px; }
+        .badge { display: inline-block; padding: 4px 10px; font-size: 11px; border-radius: 20px; font-weight: 600; background-color: #e0e7ff; color: #4338ca; }
+        .badge.uniform { background-color: #f3e8ff; color: #6b21a8; }
+        .material-price { font-weight: bold; font-size: 16px; color: #111827; }
+        
+        /* SUMMARY CARD RIGHT PANEL */
+        .right-panel { flex: 1; background: white; border-radius: 12px; border: 1px solid #e5e7eb; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .right-panel h3 { color: #1e3a8a; font-size: 18px; margin-bottom: 20px; }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 15px; color: #4b5563; }
+        .summary-row.total { font-size: 22px; font-weight: bold; color: #111827; border-top: 1px solid #f3f4f6; padding-top: 15px; }
+        .buy-btn { width: 100%; padding: 14px; background-color: #d97706; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; text-align: center; margin-top: 10px; }
+        .buy-btn:hover { background-color: #b45309; }
+        
+        /* --- SHOP PAGES LAYOUT (BOOKS & UNIFORMS) --- */
+        .shop-layout { display: flex; gap: 25px; }
+        .filter-sidebar { width: 280px; background: white; border-radius: 12px; border: 1px solid #e5e7eb; padding: 20px; }
+        .filter-sidebar h3 { color: #1e3a8a; font-size: 18px; margin-bottom: 20px; }
+        .filter-group { margin-bottom: 18px; }
+        .filter-group label { display: block; font-size: 13px; font-weight: 600; color: #4b5563; margin-bottom: 6px; }
+        .filter-group select, .filter-group input { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; background-color: #f9fafb; font-size: 14px; outline: none; }
+        
+        .products-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; display: flex; flex-direction: column; }
+        .product-img-placeholder { height: 260px; background-color: #f3f4f6; display: flex; align-items: flex-start; padding: 15px; color: #9ca3af; font-size: 14px; font-weight: 500; border-bottom: 1px solid #e5e7eb; }
+        .product-details { padding: 15px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; }
+        .product-details h4 { font-size: 15px; color: #111827; margin-bottom: 10px; line-height: 1.4; height: 42px; overflow: hidden; }
+        .product-details .price { font-size: 16px; font-weight: bold; color: #1e3a8a; margin-bottom: 8px; }
+        .stock-badge { display: inline-block; align-self: flex-start; padding: 3px 8px; font-size: 11px; font-weight: 600; border-radius: 4px; }
+        .stock-badge.in { background-color: #d1fae5; color: #065f46; }
+        .stock-badge.out { background-color: #fee2e2; color: #991b1b; }
+        
+        /* STANDARD INNER PAGE TITLE */
+        .page-title { color: #1e3a8a; font-size: 24px; margin-bottom: 20px; font-weight: 600; }
+        
+        /* --- FALLBACK GENERIC TEMPLATE VIEW --- */
+        .generic-view { background: white; padding: 40px; border-radius: 12px; border: 1px solid #e5e7eb; text-align: center; }
+        .generic-view h2 { color: #1e3a8a; margin-bottom: 15px; }
+        .generic-view p { color: #6b7280; }
+    </style>
+</head>
+<body>
+
+    <div id="loginPage" class="login-screen">
+        <div class="login-card">
+            <h2>Student Portal Login</h2>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="usernameInput" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="passwordInput" placeholder="">
+            </div>
+            <button class="login-btn" onclick="navigateTo('homepage')">Login</button>
+            <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+    </div>
+
+    <div id="appShell" class="app-container hidden">
+        
+        <header>
+            <h1>Student Portal</h1>
+            <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        </header>
+
+        <nav id="sidebarMenu" class="sidebar">
+            <div class="sidebar-item active" id="nav-homepage" onclick="navigateTo('homepage')">Homepage</div>
+            <div class="sidebar-item" id="nav-book" onclick="navigateTo('book')">Book Page</div>
+            <div class="sidebar-item" id="nav-uniform" onclick="navigateTo('uniform')">Uniform Page</div>
+            <div class="sidebar-item" id="nav-checkout" onclick="navigateTo('checkout')">Check Out</div>
+            <div class="sidebar-item" id="nav-status" onclick="navigateTo('status')">Order Status</div>
+            <div class="sidebar-item" id="nav-history" onclick="navigateTo('history')">Order History</div>
+            <div class="sidebar-item" id="nav-account" onclick="navigateTo('account')">Account Info</div>
+            <div class="sidebar-item logout" onclick="navigateTo('logout')">↪ Log out</div>
+        </nav>
+
+        <main class="main-content">
+            
+            <div id="view-homepage" class="view-section">
+                <div class="welcome-banner">
+                    <h2>Welcome back, Student!</h2>
+                    <p>Here are the required learning materials for your course</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="left-panel">
+                        <h3>Required Learning Materials</h3>
+                        
+                        <div class="material-list-item">
+                            <div class="material-info">
+                                <h4>Introduction to Computer Science Textbook</h4>
+                                <span class="badge">Book</span>
+                            </div>
+                            <div class="material-price">$89.99</div>
+                        </div>
+                        
+                        <div class="material-list-item">
+                            <div class="material-info">
+                                <h4>Calculus for Engineers</h4>
+                                <span class="badge">Book</span>
+                            </div>
+                            <div class="material-price">$125.50</div>
+                        </div>
+                        
+                        <div class="material-list-item">
+                            <div class="material-info">
+                                <h4>Physics Laboratory Manual</h4>
+                                <span class="badge">Book</span>
+                            </div>
+                            <div class="material-price">$45.00</div>
+                        </div>
+
+                        <div class="material-list-item">
+                            <div class="material-info">
+                                <h4>School Polo Shirt - White</h4>
+                                <span class="badge uniform">Uniform</span>
+                            </div>
+                            <div class="material-price">$35.00</div>
+                        </div>
+
+                        <div class="material-list-item">
+                            <div class="material-info">
+                                <h4>School Pants - Navy Blue</h4>
+                                <span class="badge uniform">Uniform</span>
+                            </div>
+                            <div class="material-price">$55.00</div>
+                        </div>
+
+                        <div class="material-list-item">
+                            <div class="material-info">
+                                <h4>Laboratory Coat</h4>
+                                <span class="badge uniform">Uniform</span>
+                            </div>
+                            <div class="material-price">$42.00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="right-panel">
+                        <h3>Summary</h3>
+                        <div class="summary-row">
+                            <span>Total Items:</span>
+                            <strong>6</strong>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Auto Total:</span>
+                            <span>$392.49</span>
+                        </div>
+                        <button class="buy-btn" onclick="navigateTo('checkout')">Buy All Required Materials</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-book" class="view-section hidden">
+                <h2 class="page-title">Book Page</h2>
+                <div class="shop-layout">
+                    <div class="filter-sidebar">
+                        <h3>Filters</h3>
+                        <div class="filter-group">
+                            <label>Search</label>
+                            <input type="text" placeholder="Search books...">
+                        </div>
+                        <div class="filter-group">
+                            <label>Category</label>
+                            <select>
+                                <option>All</option>
+                                <option>Computer Science</option>
+                                <option>Mathematics</option>
+                                <option>Physics</option>
+                                <option>Engineering</option>
+                                <option>Chemistry</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Price Range</label>
+                            <select>
+                                <option>All</option>
+                                <option>Under $50</option>
+                                <option>$50-$100</option>
+                                <option>Over $100</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Availability</label>
+                            <select>
+                                <option>All</option>
+                                <option>In Stock</option>
+                                <option>Out of Stock</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-img-placeholder">Introduction to Computer Science Textbook</div>
+                            <div class="product-details">
+                                <h4>Introduction to Computer Science Textbook</h4>
+                                <div class="price">$89.99</div>
+                                <span class="stock-badge in">In Stock (12)</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">Calculus for Engineers</div>
+                            <div class="product-details">
+                                <h4>Calculus for Engineers</h4>
+                                <div class="price">$125.50</div>
+                                <span class="stock-badge in">In Stock (5)</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">Physics Laboratory Manual</div>
+                            <div class="product-details">
+                                <h4>Physics Laboratory Manual</h4>
+                                <div class="price">$45.00</div>
+                                <span class="stock-badge in">In Stock (20)</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">Engineering Mechanics</div>
+                            <div class="product-details">
+                                <h4>Engineering Mechanics</h4>
+                                <div class="price">$98.75</div>
+                                <span class="stock-badge in">In Stock (12)</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">Chemistry Principles</div>
+                            <div class="product-details">
+                                <h4>Chemistry Principles</h4>
+                                <div class="price">$110.00</div>
+                                <span class="stock-badge out">Out of Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">Data Structures and Algorithms</div>
+                            <div class="product-details">
+                                <h4>Data Structures and Algorithms</h4>
+                                <div class="price">$95.00</div>
+                                <span class="stock-badge in">In Stock (18)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-uniform" class="view-section hidden">
+                <h2 class="page-title">Uniform Page</h2>
+                <div class="shop-layout">
+                    <div class="filter-sidebar">
+                        <h3>Filters</h3>
+                        <div class="filter-group">
+                            <label>Search</label>
+                            <input type="text" placeholder="Search uniforms...">
+                        </div>
+                        <div class="filter-group">
+                            <label>Category</label>
+                            <select><option>All</option></select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Size</label>
+                            <select>
+                                <option>All</option>
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Price Range</label>
+                            <select><option>All</option></select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Availability</label>
+                            <select><option>All</option></select>
+                        </div>
+                    </div>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-img-placeholder">School Polo Shirt - White</div>
+                            <div class="product-details">
+                                <h4>School Polo Shirt - White</h4>
+                                <p style="font-size: 12px; color: #6b7280; margin-bottom: 5px;">Size: M</p>
+                                <div class="price">$35.00</div>
+                                <span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">School Polo Shirt - Navy</div>
+                            <div class="product-details">
+                                <h4>School Polo Shirt - Navy</h4>
+                                <p style="font-size: 12px; color: #6b7280; margin-bottom: 5px;">Size: L</p>
+                                <div class="price">$35.00</div>
+                                <span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">School Pants - Navy Blue</div>
+                            <div class="product-details">
+                                <h4>School Pants - Navy Blue</h4>
+                                <p style="font-size: 12px; color: #6b7280; margin-bottom: 5px;">Size: 32</p>
+                                <div class="price">$55.00</div>
+                                <span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-checkout" class="view-section hidden">
+                <div class="generic-view">
+                    <h2>🛒 Check Out Page</h2>
+                    <p>Review your orders and click settle items to process payment securely.</p>
+                </div>
+            </div>
+            
+            <div id="view-status" class="view-section hidden">
+                <div class="generic-view">
+                    <h2>📦 Order Status</h2>
+                    <p>Track your current active purchases from the university fulfillment center.</p>
+                </div>
+            </div>
+
+            <div id="view-history" class="view-section hidden">
+                <div class="generic-view">
+                    <h2>📜 Order History</h2>
+                    <p>Check the breakdown logs of your past transactions and downloadable receipts.</p>
+                </div>
+            </div>
+
+            <div id="view-account" class="view-section hidden">
+                <div class="generic-view">
+                    <h2>👤 Account Info</h2>
+                    <p>Manage your academic profile coordinates, e-wallet connection, and addresses.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // ROUTING SYSTEM (Displays chosen section, updates active links)
+        function navigateTo(targetView) {
+            // Close sidebar automatically on navigation
+            document.getElementById('sidebarMenu').classList.remove('active');
+            
+            if (targetView === 'logout') {
+                document.getElementById('appShell').classList.add('hidden');
+                document.getElementById('loginPage').classList.remove('hidden');
+                return;
+            }
+            
+            if (targetView === 'homepage' && document.getElementById('appShell').classList.contains('hidden')) {
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('appShell').classList.remove('hidden');
+            }
+
+            // Hide all views inside application
+            const views = document.querySelectorAll('.view-section');
+            views.forEach(view => view.classList.add('hidden'));
+
+            // Show selected view
+            const activeView = document.getElementById('view-' + targetView);
+            if (activeView) activeView.classList.remove('hidden');
+
+            // Sync structural styling of active sidebar tab indicators
+            const items = document.querySelectorAll('.sidebar-item');
+            items.forEach(item => item.classList.remove('active'));
+            
+            const currentTab = document.getElementById('nav-' + targetView);
+            if (currentTab) currentTab.classList.add('active');
+        }
+
+        // TOGGLE MENU DRAWER FUNCTION
+        function toggleSidebar() {
+            const menu = document.getElementById('sidebarMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
