@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student E-Commerce Portal</title>
     <style>
-        /* BASE RESET & STRUCTURE STYLE */
+        /* BASE SYSTEM STYLES */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background-color: #f8fafc; color: #1e293b; overflow-x: hidden; }
         
         .hidden { display: none !important; }
         
-        /* --- LOGIN PAGE (Screenshot 259) --- */
+        /* --- LOGIN SCREEN (Screenshot 259) --- */
         .login-screen { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f1f5f9; }
         .login-card { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 440px; border: 1px solid #e2e8f0; }
         .login-card h2 { color: #1e3a8a; margin-bottom: 24px; font-size: 26px; font-weight: 700; text-align: center; }
@@ -23,7 +23,7 @@
         .login-btn:hover { background-color: #172554; }
         .forgot-link { display: block; text-align: center; margin-top: 20px; color: #3b82f6; text-decoration: none; font-size: 14px; font-weight: 500; }
 
-        /* --- APP NAVIGATION FRAMEWORK (Screenshot 260, 262) --- */
+        /* --- APP NAVIGATION FRAMEWORK --- */
         .app-container { display: flex; flex-direction: column; min-height: 100vh; }
         header { background-color: #1e3a8a; color: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
         header h1 { font-size: 20px; font-weight: 600; }
@@ -38,31 +38,213 @@
         .main-content { padding: 24px; flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; }
         .page-title { color: #1e3a8a; font-size: 24px; font-weight: 700; margin-bottom: 24px; }
 
-        /* --- HOMEPAGE VIEW (Screenshot 260, 261) --- */
-        .welcome-banner { background: white; padding: 24px; border-radius: 12px; margin-bottom: 24px; border: 1px solid #e2e8f0; }
-        .welcome-banner h2 { color: #1e3a8a; font-size: 22px; margin-bottom: 6px; }
-        .welcome-banner p { color: #64748b; font-size: 15px; }
-        .dashboard-grid { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
-        .left-panel { flex: 2; min-width: 300px; background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 24px; }
-        .left-panel h3 { color: #1e3a8a; margin-bottom: 16px; font-size: 18px; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
-        .material-list-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid #f1f5f9; }
-        .material-list-item:last-child { border-bottom: none; }
-        .material-info h4 { font-size: 15px; color: #0f172a; margin-bottom: 4px; font-weight: 600; }
-        .badge { display: inline-block; padding: 4px 8px; font-size: 11px; border-radius: 6px; font-weight: 600; background-color: #dbeafe; color: #1e40af; }
-        .badge.uniform { background-color: #f3e8ff; color: #6b21a8; }
-        .material-price { font-weight: 700; font-size: 15px; color: #0f172a; }
-        
-        .right-panel { flex: 1; min-width: 280px; background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 24px; }
-        .right-panel h3 { color: #1e3a8a; font-size: 18px; margin-bottom: 16px; }
-        .summary-row { display: flex; justify-content: space-between; margin-bottom: 14px; font-size: 15px; color: #475569; }
-        .summary-row.total { font-size: 20px; font-weight: 700; color: #0f172a; border-top: 1px solid #e2e8f0; padding-top: 14px; margin-top: 14px; }
-        .action-btn { width: 100%; padding: 12px; background-color: #d97706; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; margin-top: 10px; transition: 0.2s; }
-        .action-btn:hover { background-color: #b45309; }
-
-        /* --- PRODUCTS STORES LAYOUT (Screenshot 263 - 268) --- */
+        /* --- PRODUCTS STORES LAYOUT --- */
         .shop-layout { display: flex; gap: 24px; flex-wrap: wrap; }
         .filter-sidebar { width: 260px; min-width: 240px; background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 20px; height: fit-content; }
         .filter-sidebar h3 { color: #1e3a8a; font-size: 16px; margin-bottom: 16px; font-weight: 700; }
         .filter-group { margin-bottom: 16px; }
         .filter-group label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
-        .filter-group select, .filter-group input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 14
+        .products-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; display: flex; flex-direction: column; }
+        
+        /* --- GENERAL MODERN TABLE FORMAT --- */
+        .table-responsive { width: 100%; overflow-x: auto; background: white; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 24px; }
+        .portal-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+        .portal-table th { background-color: #f8fafc; padding: 16px; font-weight: 600; color: #475569; border-bottom: 1px solid #e2e8f0; }
+        .portal-table td { padding: 16px; border-bottom: 1px solid #f1f5f9; color: #0f172a; vertical-align: middle; }
+        
+        /* --- EXPLICIT FINISHED ACCOUNT INFO REPLICA (Screenshot 31) --- */
+        .academic-profile-wrapper { display: flex; flex-direction: column; gap: 24px; }
+        
+        /* The main profile header card */
+        .profile-header-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
+        .profile-card-top { position: relative; height: 160px; background: rgb(30,58,138); background: linear-gradient(130deg, rgba(30,58,138,1) 0%, rgba(30,58,138,1) 40%, rgba(217,119,6,1) 100%); display: flex; align-items: center; padding: 30px; }
+        .avatar-circle { width: 100px; height: 100px; border-radius: 50%; background-color: rgba(255,255,255,0.2); color: white; font-size: 36px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid white; margin-right: 25px; }
+        .profile-card-name-group { display: flex; flex-direction: column; color: white; }
+        .profile-card-name-group h3 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+        .profile-card-name-group p { font-size: 16px; font-weight: 400; opacity: 0.9; }
+
+        /* The data fields box */
+        .academic-profile-data-box { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 24px; }
+        .academic-profile-data-box h3 { color: #1e3a8a; font-size: 16px; font-weight: 700; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .data-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        @media(max-width: 600px) { .data-field-row { grid-template-columns: 1fr; gap: 16px; } }
+        
+        .info-field-with-icon { display: flex; flex-direction: column; gap: 8px; }
+        .info-field-with-icon label { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; margin-bottom: 2px; }
+        
+        .info-field-input-wrapper { display: flex; align-items: center; border: 1px solid #cbd5e1; border-radius: 8px; background-color: #f8fafc; overflow: hidden; height: 44px; transition: 0.2s; }
+        .info-field-input-wrapper:focus-within { border-color: #1e3a8a; background-color: white; box-shadow: 0 0 0 3px rgba(30,58,138,0.1); }
+        
+        .field-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #64748b; opacity: 0.8; }
+        .info-field-input-wrapper input { flex: 1; height: 100%; border: none; padding: 0 12px; font-size: 14px; outline: none; background: transparent; color: #0f172a; font-weight: 500; }
+        .info-field-input-wrapper input[readonly] { color: #475569; }
+        
+    </style>
+</head>
+<body>
+
+    <div id="loginPage" class="login-screen">
+        <div class="login-card">
+            <h2>Student Portal Login</h2>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" value="student2026" id="usernameInput">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" value="password123" id="passwordInput">
+            </div>
+            <button class="login-btn" onclick="navigateTo('homepage')">Login</button>
+            <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+    </div>
+
+    <div id="appShell" class="app-container hidden">
+        
+        <header>
+            <h1>Student Portal</h1>
+            <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        </header>
+
+        <nav id="sidebarMenu" class="sidebar">
+            <div class="sidebar-item active" id="nav-homepage" onclick="navigateTo('homepage')">Homepage</div>
+            <div class="sidebar-item" id="nav-book" onclick="navigateTo('book')">Book Page</div>
+            <div class="sidebar-item" id="nav-uniform" onclick="navigateTo('uniform')">Uniform Page</div>
+            <div class="sidebar-item" id="nav-checkout" onclick="navigateTo('checkout')">Check Out</div>
+            <div class="sidebar-item" id="nav-status" onclick="navigateTo('status')">Order Status</div>
+            <div class="sidebar-item" id="nav-history" onclick="navigateTo('history')">Order History</div>
+            <div class="sidebar-item" id="nav-account" onclick="navigateTo('account')">Account Info</div>
+            <div class="sidebar-item logout" onclick="navigateTo('logout')">↪ Log out</div>
+        </nav>
+
+        <main class="main-content">
+            
+            <div id="view-homepage" class="view-section hidden">
+                <div class="generic-panel">Homepage (Log in to see this content)</div>
+            </div>
+
+            <div id="view-account" class="view-section">
+                <h2 class="page-title">Account Information</h2>
+                <div class="academic-profile-wrapper">
+                    
+                    <div class="profile-header-card">
+                        <div class="profile-card-top">
+                            <div class="avatar-circle">JD</div>
+                            <div class="profile-card-name-group">
+                                <h3>Juan Dela Cruz</h3>
+                                <p>#2023-00001</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="academic-profile-data-box">
+                        <h3>Academic Profile</h3>
+                        
+                        <div class="data-field-row">
+                            <div class="info-field-with-icon">
+                                <label>Student Name</label>
+                                <div class="info-field-input-wrapper">
+                                    <div class="field-icon">👤</div>
+                                    <input type="text" value="Juan Dela Cruz" readonly>
+                                </div>
+                            </div>
+                            <div class="info-field-with-icon">
+                                <label>Student Number</label>
+                                <div class="info-field-input-wrapper">
+                                    <div class="field-icon">✉️</div>
+                                    <input type="text" value="2023-00001" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-field-row">
+                            <div class="info-field-with-icon">
+                                <label>Email Address</label>
+                                <div class="info-field-input-wrapper">
+                                    <div class="field-icon">📧</div>
+                                    <input type="email" value="juan.delacruz@university.edu" readonly>
+                                </div>
+                            </div>
+                            <div class="info-field-with-icon">
+                                <label>Department</label>
+                                <div class="info-field-input-wrapper">
+                                    <div class="field-icon">🎓</div>
+                                    <input type="text" value="College of Engineering" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-field-with-icon" style="margin-top: -4px; margin-bottom: 20px;">
+                            <label>Course</label>
+                            <div class="info-field-input-wrapper">
+                                <div class="field-icon">📖</div>
+                                <input type="text" value="Bachelor of Science in Computer Science" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="data-field-row">
+                            <div class="info-field-with-icon">
+                                <label>Year Level</label>
+                                <div class="info-field-input-wrapper">
+                                    <div class="field-icon">📆</div>
+                                    <input type="text" value="2nd Year" readonly>
+                                </div>
+                            </div>
+                            <div class="info-field-with-icon">
+                                <label>Enrollment Date</label>
+                                <div class="info-field-input-wrapper">
+                                    <div class="field-icon">🗓️</div>
+                                    <input type="text" value="August 2023" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </main>
+    </div>
+
+    <script>
+        // Start showing the right page logic
+        function navigateTo(targetView) {
+            document.getElementById('sidebarMenu').classList.remove('active');
+            
+            if (targetView === 'logout') {
+                document.getElementById('appShell').classList.add('hidden');
+                document.getElementById('loginPage').classList.remove('hidden');
+                return;
+            }
+            
+            if (document.getElementById('loginPage').classList.contains('hidden')) {
+                document.getElementById('appShell').classList.remove('hidden');
+            } else if (targetView === 'homepage') {
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('appShell').classList.remove('hidden');
+            }
+
+            const views = document.querySelectorAll('.view-section');
+            views.forEach(view => view.classList.add('hidden'));
+
+            const activeView = document.getElementById('view-' + targetView);
+            if (activeView) activeView.classList.remove('hidden');
+
+            const items = document.querySelectorAll('.sidebar-item');
+            items.forEach(item => item.classList.remove('active'));
+            
+            const currentTab = document.getElementById('nav-' + targetView);
+            if (currentTab) currentTab.classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebarMenu').classList.toggle('active');
+        }
+        
+        // Initial call set to account info page for testing direct access to this view
+        navigateTo('account');
+    </script>
+</body>
+</html>
