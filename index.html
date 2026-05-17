@@ -61,25 +61,28 @@
         .shop-layout { display: flex; gap: 24px; flex-wrap: wrap; }
         
         /* --- REVISED FILTER SIDEBAR (image_006a79.png) --- */
-        .filter-sidebar { width: 320px; min-width: 280px; background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 30px; height: fit-content; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-        .filter-sidebar h3 { color: #1e3a8a; font-size: 24px; margin-bottom: 24px; font-weight: 600; }
-        .filter-group { margin-bottom: 24px; position: relative; }
-        .filter-group label { display: block; font-size: 16px; font-weight: 600; color: #000000; margin-bottom: 12px; }
+        .filter-sidebar { width: 300px; min-width: 260px; background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 24px; height: fit-content; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .filter-sidebar h3 { color: #1e3a8a; font-size: 22px; margin-bottom: 20px; font-weight: 600; }
+        .filter-group { margin-bottom: 20px; position: relative; }
+        .filter-group label { display: block; font-size: 15px; font-weight: 600; color: #000000; margin-bottom: 10px; }
         .filter-group .input-wrapper { position: relative; width: 100%; }
-        .filter-group .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 18px; pointer-events: none; }
-        .filter-group select, .filter-group input { width: 100%; padding: 14px 16px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #f1f5f9; font-size: 16px; color: #64748b; outline: none; appearance: none; -webkit-appearance: none; }
-        .filter-group input { padding-left: 44px; }
-        .filter-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23000000' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 16px; padding-right: 40px; }
+        .filter-group .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 16px; pointer-events: none; }
+        .filter-group select, .filter-group input { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; background-color: #f1f5f9; font-size: 15px; color: #334155; outline: none; appearance: none; -webkit-appearance: none; }
+        .filter-group input { padding-left: 38px; }
+        .filter-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23000000' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; padding-right: 36px; }
         
-        .products-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-        .product-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; display: flex; flex-direction: column; }
-        .product-img-placeholder { height: 180px; background-color: #f1f5f9; display: flex; align-items: center; justify-content: center; text-align: center; padding: 16px; color: #64748b; font-size: 13px; font-weight: 600; border-bottom: 1px solid #e2e8f0; }
-        .product-details { padding: 16px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; }
-        .product-details h4 { font-size: 14px; color: #0f172a; margin-bottom: 8px; line-height: 1.4; font-weight: 600; }
-        .product-details .info-sub { font-size: 12px; color: #64748b; margin-bottom: 6px; }
-        .product-details .price { font-size: 16px; font-weight: 700; color: #1e3a8a; margin-bottom: 8px; }
-        .stock-badge { display: inline-block; align-self: flex-start; padding: 3px 8px; font-size: 11px; font-weight: 600; border-radius: 4px; }
+        /* --- OPTIMIZED/COMPACT PRODUCTS GRID FOR 10 ITEMS --- */
+        .products-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+        .product-card { background: white; border-radius: 10px; border: 1px solid #e2e8f0; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.15s; }
+        .product-card:hover { transform: translateY(-2px); }
+        .product-img-placeholder { height: 110px; background-color: #f1f5f9; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; color: #64748b; font-size: 11px; font-weight: 600; border-bottom: 1px solid #e2e8f0; line-height: 1.3; }
+        .product-details { padding: 12px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 4px; }
+        .product-details h4 { font-size: 13px; color: #0f172a; line-height: 1.3; font-weight: 600; min-height: 34px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .product-details .info-sub { font-size: 11px; color: #64748b; }
+        .product-details .price { font-size: 14px; font-weight: 700; color: #1e3a8a; }
+        .stock-badge { display: inline-block; align-self: flex-start; padding: 2px 6px; font-size: 10px; font-weight: 600; border-radius: 4px; }
         .stock-badge.in { background-color: #d1fae5; color: #065f46; }
+        .stock-badge.out { background-color: #fee2e2; color: #991b1b; }
 
         /* --- TABLES & RESPONSIVE PANELS --- */
         .table-responsive { width: 100%; overflow-x: auto; background: white; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 24px; }
@@ -251,40 +254,112 @@
                         </div>
                         <div class="filter-group">
                             <label>Category</label>
-                            <select><option>All</option></select>
+                            <select>
+                                <option>All Courses</option>
+                                <option>Computer Science</option>
+                                <option>Engineering</option>
+                                <option>Information Technology</option>
+                                <option>Business Administration</option>
+                            </select>
                         </div>
                         <div class="filter-group">
                             <label>Price Range</label>
-                            <select><option>All</option></select>
+                            <select>
+                                <option>All</option>
+                                <option>Under $50</option>
+                                <option>$50-$100</option>
+                                <option>Over $100</option>
+                            </select>
                         </div>
                         <div class="filter-group">
                             <label>Availability</label>
-                            <select><option>All</option></select>
+                            <select>
+                                <option>All</option>
+                                <option>In Stock</option>
+                                <option>Out of Stock</option>
+                            </select>
                         </div>
                     </div>
+                    
                     <div class="products-grid">
                         <div class="product-card">
-                            <div class="product-img-placeholder">Introduction to Computer Science Textbook</div>
+                            <div class="product-img-placeholder">📖 CS Textbook</div>
                             <div class="product-details">
-                                <h4>Introduction to Computer Science Textbook</h4>
-                                <div class="info-sub">5th Edition, Hardcover</div>
-                                <div class="price">$89.99</div><span class="stock-badge in">In Stock (12)</span>
+                                <h4>Introduction to Computer Science</h4>
+                                <div class="info-sub">5th Edition</div>
+                                <div class="price">$89.99</div><span class="stock-badge in">In Stock</span>
                             </div>
                         </div>
                         <div class="product-card">
-                            <div class="product-img-placeholder">Calculus for Engineers</div>
+                            <div class="product-img-placeholder">📖 Calculus</div>
                             <div class="product-details">
                                 <h4>Calculus for Engineers</h4>
-                                <div class="info-sub">4th Edition, Paperback</div>
-                                <div class="price">$125.50</div><span class="stock-badge in">In Stock (5)</span>
+                                <div class="info-sub">4th Edition</div>
+                                <div class="price">$125.50</div><span class="stock-badge in">In Stock</span>
                             </div>
                         </div>
                         <div class="product-card">
-                            <div class="product-img-placeholder">Physics Laboratory Manual</div>
+                            <div class="product-img-placeholder">📖 Physics Lab</div>
                             <div class="product-details">
-                                <h4>Physics Laboratory Manual</h4>
+                                <h4>Physics Lab Manual</h4>
                                 <div class="info-sub">2026 Edition</div>
-                                <div class="price">$45.00</div><span class="stock-badge in">In Stock (20)</span>
+                                <div class="price">$45.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">📖 Discrete Math</div>
+                            <div class="product-details">
+                                <h4>Discrete Mathematics Structures</h4>
+                                <div class="info-sub">3rd Edition</div>
+                                <div class="price">$65.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">📖 Programming</div>
+                            <div class="product-details">
+                                <h4>Java Programming Essentials</h4>
+                                <div class="info-sub">1st Edition</div>
+                                <div class="price">$38.50</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">📖 Data Structures</div>
+                            <div class="product-details">
+                                <h4>Algorithms & Data Structures</h4>
+                                <div class="info-sub">2nd Edition</div>
+                                <div class="price">$110.00</div><span class="stock-badge out">Out of Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">📖 Data Science</div>
+                            <div class="product-details">
+                                <h4>Introduction to Data Science</h4>
+                                <div class="info-sub">International Ed.</div>
+                                <div class="price">$95.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">📖 Networking</div>
+                            <div class="product-details">
+                                <h4>Computer Networks & Security</h4>
+                                <div class="info-sub">6th Edition</div>
+                                <div class="price">$135.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">📖 Web Dev</div>
+                            <div class="product-details">
+                                <h4>Modern Web Development</h4>
+                                <div class="info-sub">2025 Edition</div>
+                                <div class="price">$49.99</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">📖 Databases</div>
+                            <div class="product-details">
+                                <h4>Database System Concepts</h4>
+                                <div class="info-sub">7th Edition</div>
+                                <div class="price">$118.00</div><span class="stock-badge in">In Stock</span>
                             </div>
                         </div>
                     </div>
@@ -304,20 +379,36 @@
                         </div>
                         <div class="filter-group">
                             <label>Category</label>
-                            <select><option>All</option></select>
+                            <select>
+                                <option>All Courses</option>
+                                <option>Computer Science</option>
+                                <option>Engineering</option>
+                                <option>Information Technology</option>
+                                <option>Business Administration</option>
+                            </select>
                         </div>
                         <div class="filter-group">
                             <label>Price Range</label>
-                            <select><option>All</option></select>
+                            <select>
+                                <option>All</option>
+                                <option>Under $50</option>
+                                <option>$50-$100</option>
+                                <option>Over $100</option>
+                            </select>
                         </div>
                         <div class="filter-group">
                             <label>Availability</label>
-                            <select><option>All</option></select>
+                            <select>
+                                <option>All</option>
+                                <option>In Stock</option>
+                                <option>Out of Stock</option>
+                            </select>
                         </div>
                     </div>
+                    
                     <div class="products-grid">
                         <div class="product-card">
-                            <div class="product-img-placeholder">School Polo Shirt - White</div>
+                            <div class="product-img-placeholder">👕 Polo White</div>
                             <div class="product-details">
                                 <h4>School Polo Shirt - White</h4>
                                 <div class="info-sub">Size M, Cotton</div>
@@ -325,11 +416,75 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <div class="product-img-placeholder">Laboratory Coat</div>
+                            <div class="product-img-placeholder">🥼 Lab Coat</div>
                             <div class="product-details">
                                 <h4>Laboratory Coat</h4>
                                 <div class="info-sub">Size L, Standard</div>
                                 <div class="price">$42.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">👖 Slacks Black</div>
+                            <div class="product-details">
+                                <h4>Male Slacks - Charcoal Black</h4>
+                                <div class="info-sub">Size 32, Regular Fit</div>
+                                <div class="price">$48.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">👗 Skirt Blue</div>
+                            <div class="product-details">
+                                <h4>Female Skirt - Royal Blue</h4>
+                                <div class="info-sub">Size S, Pleated</div>
+                                <div class="price">$45.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">👕 PE Shirt</div>
+                            <div class="product-details">
+                                <h4>PE Official Shirt</h4>
+                                <div class="info-sub">Size XL, Uniex</div>
+                                <div class="price">$28.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">👖 PE Pants</div>
+                            <div class="product-details">
+                                <h4>PE Jogger Pants</h4>
+                                <div class="info-sub">Size L, Athletic</div>
+                                <div class="price">$34.50</div><span class="stock-badge out">Out of Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">🏅 CS Jacket</div>
+                            <div class="product-details">
+                                <h4>Computer Science Org Jacket</h4>
+                                <div class="info-sub">Size M, Premium Hood</div>
+                                <div class="price">$65.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">👟 Tech Socks</div>
+                            <div class="product-details">
+                                <h4>Official School Socks (3-pack)</h4>
+                                <div class="info-sub">Free Size, White</div>
+                                <div class="price">$15.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">👔 School Tie</div>
+                            <div class="product-details">
+                                <h4>Official Academic Uniform Tie</h4>
+                                <div class="info-sub">Standard Embroidered</div>
+                                <div class="price">$18.00</div><span class="stock-badge in">In Stock</span>
+                            </div>
+                        </div>
+                        <div class="product-card">
+                            <div class="product-img-placeholder">🧥 Blazer Premium</div>
+                            <div class="product-details">
+                                <h4>Formal University Blazer</h4>
+                                <div class="info-sub">Size L, Tailored</div>
+                                <div class="price">$120.00</div><span class="stock-badge in">In Stock</span>
                             </div>
                         </div>
                     </div>
